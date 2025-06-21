@@ -36,10 +36,20 @@ jobs:
 
   job-3:
     runs-on: ubuntu-latest
-    needs: [job-2]
+    needs: [job-1]
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Test step job 3
+        run: echo test!
+
+  job-4:
+    runs-on: ubuntu-latest
+    needs: [job-2, job-3]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test step job 4
         run: echo test!
