@@ -28,3 +28,15 @@ jobs:
 
       - name: Run unit tests
         run: npm test
+
+  
+  build-and-push-job:
+    needs: unit-test-job
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Clone Source Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t lebondeveloppeur/backend-api-image:latest .
