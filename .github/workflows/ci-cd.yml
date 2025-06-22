@@ -40,3 +40,6 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t lebondeveloppeur/backend-api-image:latest .
+
+      - name: show images
+        run: docker images
