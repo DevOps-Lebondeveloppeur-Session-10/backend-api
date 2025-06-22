@@ -64,4 +64,8 @@ jobs:
 
             # Pull the latest Docker image
             sudo docker pull lebondeveloppeur/backend-api-image:latest
+
+            ls -l
+
+            sudo docker images
         
