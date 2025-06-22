@@ -62,10 +62,23 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
 
-            # Pull the latest Docker image
-            sudo docker pull lebondeveloppeur/backend-api-image:latest
+              # Pull the latest Docker image
+              sudo docker pull lebondeveloppeur/backend-api-image:latest
 
-            ls -l
+                  # Remove the old container if it exists
+              sudo docker ps -q --filter name=backend-api | grep -q . && sudo docker rm -f backend-api || echo "No existing container to remove"
 
-            sudo docker images
-        
+              # Run the new container with environment variables
+              sudo docker run -d \
+                --name backend-api \
+                --network backend-api-net \
+                -p 3001:3001 \
+                -e MONGO_URI=${{ secrets.MONGO_URI }} \
+                --restart=always \
+                lebondeveloppeur/backend-api-image:latest
+
+              # Shows running containers
+              sudo docker ps
+
+              # Clean up unused images.
+              sudo docker image prune -f
