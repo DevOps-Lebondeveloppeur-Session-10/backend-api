@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/hello", (req, res) => {
-  res.send("Hello Chabeb");
+  res.send("Hello test");
 });
 
 app.get("/health", async (req, res) => {
