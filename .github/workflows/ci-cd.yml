@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI/CD Pipeline - Backend API
 
 # Controls when the workflow will run
 on:
@@ -36,8 +36,32 @@ jobs:
       - name: Run unit tests
         run: npm test
   
+
+        
+    # ✅ Static Code Analysis (SonarQube)
+  sonarqube-code-quality-scan-job:
+    runs-on: ubuntu-latest
+    needs: unit-test-job  # Run after tests
+    steps:
+      - name: Clone Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
   build-and-push-job:
-    needs: unit-test-job
+    needs: sonarqube-code-quality-scan-job
     runs-on: ubuntu-latest
     steps:
 
@@ -72,7 +96,7 @@ jobs:
               # Pull the latest Docker image
               sudo docker pull ${{ env.IMAGE_NAME }}
 
-                  # Remove the old container if it exists
+              # Remove the old container if it exists
               sudo docker ps -q --filter name=backend-api | grep -q . && sudo docker rm -f backend-api || echo "No existing container to remove"
 
               # Run the new container with environment variables
