@@ -131,7 +131,7 @@ jobs:
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
-          password: vps-1234567
+          password: vps-123456
           script: |
 
               # Pull the latest Docker image
