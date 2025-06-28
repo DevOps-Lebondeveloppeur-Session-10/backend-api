@@ -60,8 +60,31 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
+  # ✅ Gitleaks Secret Scan
+  gitleaks-scan-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Source Code
+        uses: actions/checkout@v4
+
+      - name: Install Gitleaks
+        run: |
+          curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -o gitleaks
+          chmod +x gitleaks
+          sudo mv gitleaks /usr/local/bin/
+
+      - name: Run Gitleaks
+        run: |
+          gitleaks detect --source . --report-path gitleaks-report.json --exit-code 1
+
+      - name: Upload Gitleaks Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report
+          path: gitleaks-report.json
+
   build-and-push-job:
-    needs: sonarqube-code-quality-scan-job
+    needs: [sonarqube-code-quality-scan-job, gitleaks-scan-job]
     runs-on: ubuntu-latest
     steps:
 
