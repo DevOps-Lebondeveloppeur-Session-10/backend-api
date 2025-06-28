@@ -1,0 +1,5 @@
+[[rules]]
+id = "stripe-api-key"
+description = "Stripe API Secret Key"
+regex = '''sk_live_[0-9a-zA-Z]{24,}'''
+tags = ["key", "stripe"]
