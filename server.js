@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors"; 
 import productRoutes from "./routes/product.route.js";
-import config from "./config.js";
 
 dotenv.config();
 
@@ -23,9 +22,8 @@ async function connectDB() {
   }
 
   try {
-    // Example usage of dbPassword from config
-    // const dbPassword = config.dbPassword;
-    // You can use dbPassword to construct your MONGO_URI if needed
+    //const mongo_uri = "mongodb+srv://hello:z6zh1uoYDogObtYM@cluster0.mq57s.mongodb.net/book-store?authSource=admin"
+  // console.log("mongo_uri=",mongo_uri)
     await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB connected successfully!");
   } catch (error) {
@@ -33,10 +31,6 @@ async function connectDB() {
     process.exit(1);
   }
 }
-
-// Example usage of Stripe keys from config
-console.log("Stripe API Key:", config.stripeApiKey);
-console.log("Stripe:", config.stripe);
 
 connectDB();
 
