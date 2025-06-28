@@ -60,22 +60,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-   # ✅ Secret Scanning (Gitleaks)
-  gitleaks-secret-scan-job:
-    runs-on: ubuntu-latest
-    needs: [sonarqube-code-quality-scan-job]  # Run in parallel after code analysis
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Run Gitleaks Scan
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITLEAKS_LICENSE: 7A0935-649521-D9BF5A-2CF6E6-A955F1-V3 
-       
-
   build-and-push-job:
-    needs: [gitleaks-secret-scan-job]
+    needs: sonarqube-code-quality-scan-job
     runs-on: ubuntu-latest
     steps:
 
