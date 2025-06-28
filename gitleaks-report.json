@@ -1,0 +1,23 @@
+[
+ {
+  "RuleID": "generic-api-key",
+  "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+  "StartLine": 48,
+  "EndLine": 48,
+  "StartColumn": 12,
+  "EndColumn": 57,
+  "Match": "password: REDACTED",
+  "Secret": "REDACTED",
+  "File": ".github/workflows/ci-cd.yml",
+  "SymlinkFile": "",
+  "Commit": "cd1a001b83abe3f0553acf11b273a1cc88def7a4",
+  "Link": "https://github.com/DevOps-Lebondeveloppeur-Session-10/backend-api/blob/cd1a001b83abe3f0553acf11b273a1cc88def7a4/.github/workflows/ci-cd.yml#L48",
+  "Entropy": 4.7045116,
+  "Author": "Wassim Assidi",
+  "Email": "assidi.wassim.fsm@hotmail.com",
+  "Date": "2025-06-22T19:03:04Z",
+  "Message": "fix unit test job",
+  "Tags": [],
+  "Fingerprint": "cd1a001b83abe3f0553acf11b273a1cc88def7a4:.github/workflows/ci-cd.yml:generic-api-key:48"
+ }
+]
