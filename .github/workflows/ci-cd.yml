@@ -98,7 +98,7 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Run Snyk Vulnerability Scan
-        run: snyk test
+        run: snyk test --all-projects --org=my-assidiwassim --file=package.json
 
       # ✅ Build and Push Docker Image
   build-and-push-job:
@@ -131,7 +131,7 @@ jobs:
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
-          password: vps-123456
+          password: ${{ secrets.VPS_PASSWORD }}
           script: |
 
               # Pull the latest Docker image
