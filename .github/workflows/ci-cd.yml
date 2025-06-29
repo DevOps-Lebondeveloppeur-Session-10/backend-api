@@ -98,9 +98,9 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Run Snyk Vulnerability Scan
-        run: snyk test --all-projects --org=assidiwassim
+        run: snyk monitor --all-projects --org=assidiwassim
 
-      # ✅ Build and Push Docker Image
+  # ✅ Build and Push Docker Image
   build-and-push-job:
     needs: [trivy-image-security-scan-job, snyk-code-security-scan-job]
     runs-on: ubuntu-latest
