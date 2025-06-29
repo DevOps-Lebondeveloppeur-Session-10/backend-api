@@ -98,7 +98,7 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Run Snyk Vulnerability Scan
-        run: snyk test --all-projects --org=my-assidiwassim --file=package.json
+        run: snyk test --all-projects --org=my-assidiwassim
 
       # ✅ Build and Push Docker Image
   build-and-push-job:
